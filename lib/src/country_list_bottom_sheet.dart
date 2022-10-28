@@ -11,10 +11,8 @@ void showCountryListBottomSheet({
   List<String>? favorite,
   List<String>? exclude,
   List<String>? countryFilter,
-  bool showPhoneCode = false,
   CountryListThemeData? countryListTheme,
   bool searchAutofocus = false,
-  bool showWorldWide = false,
 }) {
   showModalBottomSheet(
     context: context,
@@ -26,10 +24,8 @@ void showCountryListBottomSheet({
       favorite,
       exclude,
       countryFilter,
-      showPhoneCode,
       countryListTheme,
       searchAutofocus,
-      showWorldWide,
     ),
   ).whenComplete(() {
     if (onClosed != null) onClosed();
@@ -42,15 +38,13 @@ Widget _builder(
   List<String>? favorite,
   List<String>? exclude,
   List<String>? countryFilter,
-  bool showPhoneCode,
   CountryListThemeData? countryListTheme,
   bool searchAutofocus,
-  bool showWorldWide,
 ) {
   final device = MediaQuery.of(context).size.height;
   final statusBarHeight = MediaQuery.of(context).padding.top;
-  final height = countryListTheme?.bottomSheetHeight ??
-      device - (statusBarHeight + (kToolbarHeight / 1.5));
+  final height = countryListTheme?.bottomSheetHeight ?? device * 0.6;
+  //device - (statusBarHeight + (kToolbarHeight / 1.5));
 
   Color? _backgroundColor = countryListTheme?.backgroundColor ??
       Theme.of(context).bottomSheetTheme.backgroundColor;
@@ -68,21 +62,40 @@ Widget _builder(
         topRight: Radius.circular(40.0),
       );
 
-  return Container(
-    height: height,
-    decoration: BoxDecoration(
-      color: _backgroundColor,
-      borderRadius: _borderRadius,
-    ),
-    child: CountryListView(
-      onSelect: onSelect,
-      exclude: exclude,
-      favorite: favorite,
-      countryFilter: countryFilter,
-      showPhoneCode: showPhoneCode,
-      countryListTheme: countryListTheme,
-      searchAutofocus: searchAutofocus,
-      showWorldWide: showWorldWide,
-    ),
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      SizedBox(
+          width: 45,
+          height: 45,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            backgroundColor: Colors.white,
+            child: Icon(Icons.close, color: Colors.black),
+          )),
+      SizedBox(height: 15),
+      Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: Color(0xfff1f1f1),
+          borderRadius: _borderRadius,
+          //border: Border.all(
+          //  width: 1,
+          //  color: Colors.orange,
+          //),
+        ),
+        child: CountryListView(
+          onSelect: onSelect,
+          exclude: exclude,
+          favorite: favorite,
+          countryFilter: countryFilter,
+          countryListTheme: countryListTheme,
+          searchAutofocus: searchAutofocus,
+        ),
+      )
+    ],
   );
 }

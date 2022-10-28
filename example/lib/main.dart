@@ -68,8 +68,6 @@ class HomePage extends StatelessWidget {
               exclude: <String>['KN', 'MF'],
               favorite: <String>['SE'],
               //Optional. Shows phone code before the country name.
-              showPhoneCode: true,
-              showWorldWide: true,
               onSelect: (Country country) {
                 print('Select country: ${country.displayName}');
               },
@@ -77,8 +75,8 @@ class HomePage extends StatelessWidget {
               countryListTheme: CountryListThemeData(
                 // Optional. Sets the border radius for the bottomsheet.
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
                 ),
                 // Optional. Styles the search field.
                 inputDecoration: InputDecoration(

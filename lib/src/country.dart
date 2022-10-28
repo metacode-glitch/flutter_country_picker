@@ -7,19 +7,6 @@ import 'country_localizations.dart';
 ///The country Model that has all the country
 ///information needed from the [country_picker]
 class Country {
-  static Country worldWide = Country(
-    phoneCode: '',
-    countryCode: 'WW',
-    e164Sc: -1,
-    geographic: false,
-    level: -1,
-    name: 'World Wide',
-    example: '',
-    displayName: 'World Wide (WW)',
-    displayNameNoCountryCode: 'World Wide',
-    e164Key: '',
-  );
-
   ///The country phone code
   final String phoneCode;
 
@@ -89,19 +76,11 @@ class Country {
         e164Key = json['e164_key'];
 
   static Country parse(String country) {
-    if (country == worldWide.countryCode) {
-      return worldWide;
-    } else {
-      return CountryParser.parse(country);
-    }
+    return CountryParser.parse(country);
   }
 
   static Country? tryParse(String country) {
-    if (country == worldWide.countryCode) {
-      return worldWide;
-    } else {
-      return CountryParser.tryParse(country);
-    }
+    return CountryParser.tryParse(country);
   }
 
   Map<String, dynamic> toJson() {
@@ -134,8 +113,6 @@ class Country {
                 .startsWith(_query.toLowerCase()) ??
             false);
   }
-
-  bool get iswWorldWide => countryCode == Country.worldWide.countryCode;
 
   @override
   String toString() => 'Country(countryCode: $countryCode, name: $name)';
