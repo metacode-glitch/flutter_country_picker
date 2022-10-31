@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'country.dart';
 import 'country_list_theme_data.dart';
 import 'country_list_view.dart';
+import 'country_code.dart';
 
 void showCountryListBottomSheet({
   required BuildContext context,
-  required ValueChanged<Country> onSelect,
+  ValueChanged<CountryCode>? onSelect,
   VoidCallback? onClosed,
   List<String>? favorite,
-  List<String>? exclude,
-  List<String>? countryFilter,
   CountryListThemeData? countryListTheme,
   bool searchAutofocus = false,
 }) {
@@ -22,8 +20,6 @@ void showCountryListBottomSheet({
       context,
       onSelect,
       favorite,
-      exclude,
-      countryFilter,
       countryListTheme,
       searchAutofocus,
     ),
@@ -34,10 +30,8 @@ void showCountryListBottomSheet({
 
 Widget _builder(
   BuildContext context,
-  ValueChanged<Country> onSelect,
+  ValueChanged<CountryCode>? onSelect,
   List<String>? favorite,
-  List<String>? exclude,
-  List<String>? countryFilter,
   CountryListThemeData? countryListTheme,
   bool searchAutofocus,
 ) {
@@ -56,11 +50,10 @@ Widget _builder(
     }
   }
 
-  final BorderRadius _borderRadius = countryListTheme?.borderRadius ??
-      const BorderRadius.only(
-        topLeft: Radius.circular(40.0),
-        topRight: Radius.circular(40.0),
-      );
+  final BorderRadius _borderRadius = const BorderRadius.only(
+    topLeft: Radius.circular(10.0),
+    topRight: Radius.circular(10.0),
+  );
 
   return Column(
     mainAxisAlignment: MainAxisAlignment.end,
@@ -89,9 +82,7 @@ Widget _builder(
         ),
         child: CountryListView(
           onSelect: onSelect,
-          exclude: exclude,
           favorite: favorite,
-          countryFilter: countryFilter,
           countryListTheme: countryListTheme,
           searchAutofocus: searchAutofocus,
         ),

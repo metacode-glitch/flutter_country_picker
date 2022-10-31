@@ -16,27 +16,32 @@ class CountryListThemeData {
   /// If null, set to 25
   final double? flagSize;
 
-  ///The decoration used for the search field
-  ///
-  /// It defaults to a basic outline-bordered input decoration
-  final InputDecoration? inputDecoration;
-
-  ///The border radius of the bottom sheet
-  ///
-  /// It defaults to 40 for the top-left and top-right values.
-  final BorderRadius? borderRadius;
-
   ///Country list modal height
   ///
   /// By default it's fullscreen
   final double? bottomSheetHeight;
 
+  final String? hintText;
+  final String? favoriteText;
+  final String? searchingText;
+  final String? emptyText;
+
+  final String? defaultText;
+  final String? labelText;
+
+  final Widget? downArrow;
+
   const CountryListThemeData({
     this.backgroundColor,
     this.textStyle,
     this.flagSize,
-    this.inputDecoration,
-    this.borderRadius,
     this.bottomSheetHeight,
+    this.hintText,
+    this.favoriteText,
+    this.searchingText,
+    this.emptyText,
+    this.defaultText,
+    this.labelText,
+    this.downArrow,
   });
 }
