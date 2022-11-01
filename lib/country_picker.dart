@@ -38,65 +38,51 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          showCountryPicker(
-            context: context,
-            onSelect: (value) {
-              setState(() {
-                _selectedCountry = "${value.dialCode} ${value.name}";
-              });
-              widget.onSelect?.call(value);
-            },
-            countryListTheme: widget.countryListTheme,
-            favorite: widget.favorite,
-          );
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.countryListTheme?.labelText ?? "",
-              style: TextStyle(
-                  color: const Color(0xffaeaeae),
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "Pretendard",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 10.0),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                showCountryPicker(
-                  context: context,
-                  onSelect: (value) {
-                    setState(() {
-                      _selectedCountry = "${value.dialCode} ${value.name}";
-                    });
-                    widget.onSelect?.call(value);
-                  },
-                  countryListTheme: widget.countryListTheme,
-                  favorite: widget.favorite,
-                );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.countryListTheme?.labelText ?? "",
+          style: TextStyle(
+              color: const Color(0xffaeaeae),
+              fontWeight: FontWeight.w400,
+              fontFamily: "Pretendard",
+              fontStyle: FontStyle.normal,
+              fontSize: 10.0),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            showCountryPicker(
+              context: context,
+              onSelect: (value) {
+                setState(() {
+                  _selectedCountry = "${value.dialCode} ${value.name}";
+                });
+                widget.onSelect?.call(value);
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size.zero,
-                padding: EdgeInsets.fromLTRB(9, 5, 9, 5),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.countryListTheme?.downArrow != null) ...[
-                    _selectedCountyText(_selectedCountry),
-                    widget.countryListTheme!.downArrow!
-                  ] else ...[
-                    _selectedCountyText(_selectedCountry),
-                  ]
-                ],
-              ),
-            )
-          ],
-        ));
+              countryListTheme: widget.countryListTheme,
+              favorite: widget.favorite,
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size.zero,
+            padding: EdgeInsets.fromLTRB(9, 5, 9, 5),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.countryListTheme?.downArrow != null) ...[
+                _selectedCountyText(_selectedCountry),
+                widget.countryListTheme!.downArrow!
+              ] else ...[
+                _selectedCountyText(_selectedCountry),
+              ]
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   Widget _selectedCountyText(String text) {
