@@ -64,23 +64,27 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Center(
-            child: CountryCodePicker(
-              onSelect: (CountryCode country) {
-                print('Select country: ${country.name}');
-              },
-              favorite: <String>['KR', 'CN', 'US'],
-              countryListTheme: CountryListThemeData(
-                  hintText: "검색할 국가 이름 또는 번호를 입력하세요.",
-                  searchingText: "검색된 정보",
-                  favoriteText: "즐겨찾는 국가",
-                  emptyText: "조회된 정보가 없습니다.",
-                  labelText: "국가선택",
-                  defaultText: "국가선택",
-                  downArrow: SvgPicture.asset(
-                    'assets/image/arrow_down.svg',
-                    color: Color(0xffb6b9c1),
-                    fit: BoxFit.scaleDown,
-                  )),
+            child: Container(
+              width: 120,
+              height: 100,
+              child: CountryCodePicker(
+                onSelect: (CountryCode country) {
+                  print('Select country: ${country.name}');
+                },
+                favorite: <String>['KR', 'CN', 'US'],
+                countryListTheme: CountryListThemeData(
+                    hintText: "검색할 국가 이름 또는 번호를 입력하세요.",
+                    searchingText: "검색된 정보",
+                    favoriteText: "즐겨찾는 국가",
+                    emptyText: "조회된 정보가 없습니다.",
+                    labelText: "국가선택",
+                    defaultText: "국가선택",
+                    downArrow: SvgPicture.asset(
+                      'assets/image/arrow_down.svg',
+                      color: Color(0xffb6b9c1),
+                      fit: BoxFit.scaleDown,
+                    )),
+              ),
             ),
           ),
         ],

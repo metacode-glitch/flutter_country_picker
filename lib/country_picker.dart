@@ -87,31 +87,30 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (widget.countryListTheme?.downArrow != null) ...[
-                    Text(
-                      _selectedCountry,
-                      style: TextStyle(
-                          color: const Color(0xff4d4d4d),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Pretendard",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 12.0),
-                    ),
+                    _selectedCountyText(_selectedCountry),
                     widget.countryListTheme!.downArrow!
                   ] else ...[
-                    Text(
-                      _selectedCountry,
-                      style: TextStyle(
-                          color: const Color(0xff4d4d4d),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Pretendard",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 12.0),
-                    )
+                    _selectedCountyText(_selectedCountry),
                   ]
                 ],
               ),
             )
           ],
+        ));
+  }
+
+  Widget _selectedCountyText(String text) {
+    return Flexible(
+        fit: FlexFit.tight,
+        child: Text(
+          text,
+          softWrap: false,
+          style: TextStyle(
+              color: const Color(0xff4d4d4d),
+              fontWeight: FontWeight.w400,
+              fontFamily: "Pretendard",
+              fontStyle: FontStyle.normal,
+              fontSize: 12.0),
         ));
   }
 }
