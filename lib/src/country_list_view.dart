@@ -69,15 +69,11 @@ class _CountryListViewState extends State<CountryListView> {
                 null,
           )
           .toList();
-      ;
     }
 
     _filteredList = <CountryCode>[];
     _searchAutofocus = widget.searchAutofocus;
-
-    setState(() {
-      _filteredList.addAll(_countryList);
-    });
+    _filteredList.addAll(_countryList);
   }
 
   @override
@@ -161,7 +157,7 @@ class _CountryListViewState extends State<CountryListView> {
         Center(
           child: Text(
             widget.countryListTheme?.emptyText ?? "",
-            style: textStyle.copyWith(color: Color(0xffafafaf)),
+            style: textStyle.copyWith(color: const Color(0xffafafaf)),
           ),
         ),
       );
@@ -224,6 +220,7 @@ class _CountryListViewState extends State<CountryListView> {
                 height: 4,
                 width: 4,
                 decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
                   color: Color(0xff23242a),
                 ),
               ),

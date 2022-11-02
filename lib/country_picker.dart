@@ -2,24 +2,24 @@ library country_picker;
 
 import 'package:flutter/material.dart';
 
+import 'src/country_code.dart';
 import 'src/country_list_bottom_sheet.dart';
 import 'src/country_list_theme_data.dart';
 
+export 'src/country_code.dart';
 export 'src/country_list_theme_data.dart';
 export 'src/country_localizations.dart';
 
-import 'src/country_code.dart';
-export 'src/country_code.dart';
-
 class CountryCodePicker extends StatefulWidget {
-  ValueChanged<CountryCode>? onSelect;
-  List<String>? favorite;
-  CountryListThemeData? countryListTheme;
-  CountryCodePicker({
+  final ValueChanged<CountryCode>? onSelect;
+  final List<String>? favorite;
+  final CountryListThemeData? countryListTheme;
+  const CountryCodePicker({
+    Key? key,
     this.onSelect,
     this.favorite,
     this.countryListTheme,
-  });
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -42,7 +42,6 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         widget.countryListTheme?.labelTextStyle ?? _defaultTextStyle;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -65,7 +64,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
           },
           style: ElevatedButton.styleFrom(
             minimumSize: Size.zero,
-            padding: EdgeInsets.fromLTRB(9, 5, 9, 5),
+            padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
