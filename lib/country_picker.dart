@@ -38,18 +38,16 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textStyle =
+        widget.countryListTheme?.labelTextStyle ?? _defaultTextStyle;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.countryListTheme?.labelText ?? "",
-          style: TextStyle(
-              color: const Color(0xffaeaeae),
-              fontWeight: FontWeight.w400,
-              fontFamily: "Pretendard",
-              fontStyle: FontStyle.normal,
-              fontSize: 10.0),
+          style: textStyle,
         ),
         OutlinedButton(
           onPressed: () {
@@ -86,19 +84,19 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   }
 
   Widget _selectedCountyText(String text) {
+    final TextStyle textStyle =
+        widget.countryListTheme?.buttonCountyNameTextStyle ?? _defaultTextStyle;
+
     return Flexible(
         fit: FlexFit.tight,
         child: Text(
           text,
           softWrap: false,
-          style: TextStyle(
-              color: const Color(0xff4d4d4d),
-              fontWeight: FontWeight.w400,
-              fontFamily: "Pretendard",
-              fontStyle: FontStyle.normal,
-              fontSize: 12.0),
+          style: textStyle.copyWith(color: const Color(0xff4d4d4d)),
         ));
   }
+
+  TextStyle get _defaultTextStyle => const TextStyle(fontSize: 16);
 }
 
 /// Shows a bottom sheet containing a list of countries to select one.

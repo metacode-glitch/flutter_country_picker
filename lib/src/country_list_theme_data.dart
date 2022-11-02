@@ -11,6 +11,10 @@ class CountryListThemeData {
   /// If null, the style will be set to [TextStyle(fontSize: 16)]
   final TextStyle? textStyle;
 
+  final TextStyle? buttonDialCodeTextStyle;
+  final TextStyle? buttonCountyNameTextStyle;
+  final TextStyle? labelTextStyle;
+
   ///The flag size.
   ///
   /// If null, set to 25
@@ -34,6 +38,9 @@ class CountryListThemeData {
   const CountryListThemeData({
     this.backgroundColor,
     this.textStyle,
+    this.buttonCountyNameTextStyle,
+    this.buttonDialCodeTextStyle,
+    this.labelTextStyle,
     this.flagSize,
     this.bottomSheetHeight,
     this.hintText,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:collection/collection.dart' show IterableExtension;
+import 'package:flutter_html/flutter_html.dart';
 import 'country_list_theme_data.dart';
 import 'country_localizations.dart';
 import 'utils.dart';
@@ -42,6 +43,7 @@ class _CountryListViewState extends State<CountryListView> {
   late List<CountryCode> _countryList;
   late List<CountryCode> _filteredList;
   late bool _searching;
+  late String _query;
   List<CountryCode>? _favoriteList;
   late TextEditingController _searchController;
   late bool _searchAutofocus;
@@ -52,26 +54,30 @@ class _CountryListViewState extends State<CountryListView> {
     _searchController = TextEditingController();
     _searching = false;
 
-    List<Map<String, String>> jsonList = codes;
+    const List<Map<String, String>> jsonList = codes;
 
     _countryList = jsonList.map((json) => CountryCode.fromJson(json)).toList();
 
     if (widget.favorite != null) {
       _favoriteList = _countryList
-          .where((e) =>
-              widget.favorite!.firstWhereOrNull((f) =>
-                  e.code!.toUpperCase() == f.toUpperCase() ||
-                  e.dialCode == f ||
-                  e.name!.toUpperCase() == f.toUpperCase()) !=
-              null)
+          .where(
+            (e) =>
+                widget.favorite!.firstWhereOrNull((f) =>
+                    e.code!.toUpperCase() == f.toUpperCase() ||
+                    e.dialCode == f ||
+                    e.name!.toUpperCase() == f.toUpperCase()) !=
+                null,
+          )
           .toList();
       ;
     }
 
     _filteredList = <CountryCode>[];
-    _filteredList.addAll(_countryList);
-
     _searchAutofocus = widget.searchAutofocus;
+
+    setState(() {
+      _filteredList.addAll(_countryList);
+    });
   }
 
   @override
@@ -84,29 +90,30 @@ class _CountryListViewState extends State<CountryListView> {
           child: TextField(
             autofocus: _searchAutofocus,
             controller: _searchController,
-            cursorColor: Color(0xff6a6a6a),
+            cursorColor: const Color(0xff6a6a6a),
             decoration: InputDecoration(
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: EdgeInsets.all(8),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff6a6a6a), width: 2)),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffb6b9c1), width: 2)),
+              contentPadding: const EdgeInsets.all(8),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff6a6a6a), width: 2),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xffb6b9c1), width: 2),
+              ),
               hintText: widget.countryListTheme?.hintText ?? "",
-              hintStyle: TextStyle(
-                  color: const Color(0xffacacac),
+              hintStyle: const TextStyle(
+                  color: Color(0xffacacac),
                   fontWeight: FontWeight.w400,
-                  fontFamily: "Pretendard",
                   fontStyle: FontStyle.normal,
                   fontSize: 12.0),
               suffixIcon: _searching
                   ? IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: const Icon(Icons.clear),
                       onPressed: () {
                         _searchController.clear();
                         _filterSearchResults("");
                       },
-                      color: Color(0xffb6b9c1),
+                      color: const Color(0xffb6b9c1),
                     )
                   : null,
             ),
@@ -114,7 +121,7 @@ class _CountryListViewState extends State<CountryListView> {
           ),
         ),
         Expanded(
-          child: Container(
+          child: ColoredBox(
               color: Colors.white,
               child: ListView(
                 children: [
@@ -127,7 +134,7 @@ class _CountryListViewState extends State<CountryListView> {
                       ..._favoriteList!
                           .map<Widget>((currency) => _listRow(currency))
                           .toList(),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                     ],
@@ -141,89 +148,102 @@ class _CountryListViewState extends State<CountryListView> {
   }
 
   List<Widget> _convertSearchCountryList(List<CountryCode> countryList) {
-    List<Widget> result = <Widget>[];
-
+    final TextStyle textStyle =
+        widget.countryListTheme?.textStyle ?? _defaultTextStyle;
+    final List<Widget> result = <Widget>[];
     if (countryList.isEmpty) {
-      result.add(SizedBox(
-        height: 24,
-      ));
-      result.add(Center(
-        child: Text(widget.countryListTheme?.emptyText ?? "",
-            style: const TextStyle(
-                color: const Color(0xffafafaf),
-                fontWeight: FontWeight.w400,
-                fontFamily: "Pretendard",
-                fontStyle: FontStyle.normal,
-                fontSize: 12.0)),
-      ));
+      result.add(
+        const SizedBox(
+          height: 24,
+        ),
+      );
+      result.add(
+        Center(
+          child: Text(
+            widget.countryListTheme?.emptyText ?? "",
+            style: textStyle.copyWith(color: Color(0xffafafaf)),
+          ),
+        ),
+      );
     } else {
       result.addAll(
-          countryList.map<Widget>((country) => _listRow(country)).toList());
+        countryList.map<Widget>((country) => _listRow(country)).toList(),
+      );
     }
-    result.add(SizedBox(
-      height: 12,
-    ));
+    result.add(
+      const SizedBox(
+        height: 12,
+      ),
+    );
     return result;
   }
 
   List<Widget> _convertCountryList(List<CountryCode> countryList) {
-    List<Widget> result = <Widget>[];
-
-    Map<String, List<CountryCode>> groupedLists = {};
-    countryList.forEach((country) {
-      String name = country.name ?? "";
-      if (groupedLists['${name[0]}'] == null) {
-        groupedLists['${name[0]}'] = <CountryCode>[];
+    final List<Widget> result = <Widget>[];
+    final Map<String, List<CountryCode>> groupedLists = {};
+    for (final country in countryList) {
+      final String name = country.name ?? "";
+      if (groupedLists[name[0]] == null) {
+        groupedLists[name[0]] = <CountryCode>[];
       }
 
-      groupedLists['${name[0]}']!.add(country);
-    });
+      groupedLists[name[0]]!.add(country);
+    }
 
-    for (var entry in groupedLists.entries) {
-      result.add(Divider(
-        thickness: 8,
-        color: Color(0xffebebeb),
-      ));
+    for (final entry in groupedLists.entries) {
+      result.add(
+        const Divider(
+          thickness: 8,
+          color: Color(0xffebebeb),
+        ),
+      );
 
       result.add(_listHeader(entry.key));
       result.addAll(
           entry.value.map<Widget>((country) => _listRow(country)).toList());
 
-      result.add(SizedBox(
-        height: 12,
-      ));
+      result.add(
+        const SizedBox(
+          height: 12,
+        ),
+      );
     }
     return result;
   }
 
   Widget _listHeader(String text) {
+    final TextStyle textStyle =
+        widget.countryListTheme?.textStyle ?? _defaultTextStyle;
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
+          padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
           child: Row(
             children: [
               Container(
                 height: 4,
                 width: 4,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xff23242a),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              Text(text)
+              Text(
+                text,
+                style: textStyle,
+              )
             ],
           ),
         ),
         Container(
           height: 1,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color(0xffe9e9e9),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
       ],
@@ -231,9 +251,6 @@ class _CountryListViewState extends State<CountryListView> {
   }
 
   Widget _listRow(CountryCode country) {
-    final TextStyle _textStyle =
-        widget.countryListTheme?.textStyle ?? _defaultTextStyle;
-
     return Material(
       // Add Material Widget with transparent color
       // so the ripple effect of InkWell will show on tap
@@ -246,27 +263,16 @@ class _CountryListViewState extends State<CountryListView> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
             children: [
               const SizedBox(width: 35),
               Flexible(
-                  fit: FlexFit.tight,
-                  child: Text(
-                    country.name ?? "",
-                    softWrap: false,
-                    style: _textStyle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  )),
-              SizedBox(
-                width: 55,
-                child: Text(
-                  country.dialCode ?? "",
-                  style: _textStyle,
-                ),
+                fit: FlexFit.tight,
+                child: _buildCountyText(country.name ?? ""),
               ),
-              const SizedBox(width: 40),
+              SizedBox(
+                width: 90,
+                child: _buildCountyText(country.dialCode ?? ""),
+              ),
               //_flagWidget(country),,
             ],
           ),
@@ -275,28 +281,68 @@ class _CountryListViewState extends State<CountryListView> {
     );
   }
 
+  Widget _buildCountyText(String text) {
+    final TextStyle textStyle =
+        widget.countryListTheme?.textStyle ?? _defaultTextStyle;
+    if (_searching) {
+      final StringBuffer stringBuffer = StringBuffer();
+      final upperCase = text.toUpperCase();
+
+      var findIdx = upperCase.indexOf(_query);
+      var startIdx = 0;
+      while (findIdx >= 0) {
+        stringBuffer.write(text.substring(startIdx, findIdx));
+        startIdx = findIdx;
+        startIdx += _query.length;
+
+        stringBuffer.write("<b>");
+        stringBuffer.write(text.substring(findIdx, startIdx));
+        stringBuffer.write("</b>");
+        findIdx = upperCase.indexOf(_query, startIdx);
+      }
+
+      stringBuffer.write(text.substring(startIdx, text.length));
+      return Html(
+        data: stringBuffer.toString(),
+        style: {
+          "p": Style.fromTextStyle(
+              textStyle.copyWith(fontWeight: FontWeight.normal)),
+          "b": Style.fromTextStyle(
+              textStyle.copyWith(fontWeight: FontWeight.bold)),
+        },
+      );
+    } else {
+      return Text(
+        text,
+        softWrap: false,
+        style: textStyle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+  }
+
   void _filterSearchResults(String query) {
-    List<CountryCode> _searchResult = <CountryCode>[];
-    final CountryLocalizations? localizations =
-        CountryLocalizations.of(context);
+    List<CountryCode> searchResult = <CountryCode>[];
 
     if (query.isEmpty) {
       _searching = false;
-      _searchResult.addAll(_countryList);
+      searchResult.addAll(_countryList);
     } else {
       _searching = true;
-      String s = query.toUpperCase();
-
-      _searchResult = _countryList
-          .where((e) =>
-              e.code!.contains(s) ||
-              e.dialCode!.contains(s) ||
-              e.name!.toUpperCase().contains(s))
+      _query = query.toUpperCase();
+      searchResult = _countryList
+          .where(
+            (e) =>
+                e.code!.contains(_query) ||
+                e.dialCode!.contains(_query) ||
+                e.name!.toUpperCase().contains(_query),
+          )
           .toList();
     }
 
     setState(() {
-      _filteredList = _searchResult;
+      _filteredList = searchResult;
     });
   }
 

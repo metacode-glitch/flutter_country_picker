@@ -79,6 +79,20 @@ class HomePage extends StatelessWidget {
                     emptyText: "조회된 정보가 없습니다.",
                     labelText: "국가선택",
                     defaultText: "국가선택",
+                    textStyle: TextStyle(),
+                    buttonCountyNameTextStyle: TextStyle(
+                      color: const Color(0xff4d4d4d),
+                      fontWeight: FontWeight.w400,
+                    ),
+                    buttonDialCodeTextStyle: TextStyle(
+                      color: const Color(0xff4d4d4d),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    labelTextStyle: TextStyle(
+                      color: const Color(0xffaeaeae),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
                     downArrow: SvgPicture.asset(
                       'assets/image/arrow_down.svg',
                       color: Color(0xffb6b9c1),

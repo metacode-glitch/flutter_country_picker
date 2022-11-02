@@ -7,12 +7,13 @@ homepage: https://github.com/Daniel-Ioannou
 repository: https://github.com/Daniel-Ioannou/flutter_country_picker
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   collection: ^1.15.0
+  flutter_html: ^3.0.0-alpha.6
 
 flutter:
   assets:
@@ -86,7 +87,7 @@ flutter:
     - packages/country_picker/i18n/uk.json
     - packages/country_picker/i18n/uz.json
     - packages/country_picker/i18n/zh.json
-    
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
