@@ -213,7 +213,7 @@ class _CountryListViewState extends State<CountryListView> {
 
   Widget _listHeader(String text) {
     final TextStyle textStyle =
-        widget.countryListTheme?.textStyle ?? _defaultTextStyle;
+        widget.countryListTheme?.headerTextStyle ?? _defaultTextStyle;
     return Column(
       children: [
         Container(

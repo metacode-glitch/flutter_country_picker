@@ -93,6 +93,11 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                     ),
+                    headerTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                    ),
                     downArrow: SvgPicture.asset(
                       'assets/image/arrow_down.svg',
                       color: Color(0xffb6b9c1),

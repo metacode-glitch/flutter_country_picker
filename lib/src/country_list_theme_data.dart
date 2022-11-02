@@ -14,6 +14,7 @@ class CountryListThemeData {
   final TextStyle? buttonDialCodeTextStyle;
   final TextStyle? buttonCountyNameTextStyle;
   final TextStyle? labelTextStyle;
+  final TextStyle? headerTextStyle;
 
   ///The flag size.
   ///
@@ -41,6 +42,7 @@ class CountryListThemeData {
     this.buttonCountyNameTextStyle,
     this.buttonDialCodeTextStyle,
     this.labelTextStyle,
+    this.headerTextStyle,
     this.flagSize,
     this.bottomSheetHeight,
     this.hintText,
