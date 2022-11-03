@@ -49,7 +49,6 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         orElse: () => CountryCode(),
       );
       if (find.name != null) {
-        find.localize(context);
         _selectedCountry = "${find.dialCode} ${find.name}";
         return;
       }
