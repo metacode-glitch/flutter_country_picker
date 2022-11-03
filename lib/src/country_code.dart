@@ -10,7 +10,7 @@ class CountryCode {
   String? name;
 
   /// the flag of the country
-  final String? flagUri;
+  //final String? flagUri;
 
   /// the country code (IT,AF..)
   final String? code;
@@ -20,7 +20,7 @@ class CountryCode {
 
   CountryCode({
     this.name,
-    this.flagUri,
+    //this.flagUri,
     this.code,
     this.dialCode,
   });
@@ -55,7 +55,7 @@ class CountryCode {
       name: json['name'],
       code: json['code'],
       dialCode: json['dial_code'],
-      flagUri: 'flags/${json['code'].toLowerCase()}.png',
+      //flagUri: 'flags/${json['code'].toLowerCase()}.png',
     );
   }
 

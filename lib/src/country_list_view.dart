@@ -73,6 +73,12 @@ class _CountryListViewState extends State<CountryListView> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    this._countryList = _countryList.map((e) => e.localize(context)).toList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
