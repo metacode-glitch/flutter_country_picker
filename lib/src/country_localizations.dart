@@ -25,7 +25,6 @@ class CountryLocalizations {
         .loadString('packages/country_picker/i18n/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
-    print(jsonString);
     _localizedStrings = jsonMap.map((key, value) {
       return MapEntry(key, value.toString());
     });

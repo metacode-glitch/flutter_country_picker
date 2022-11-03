@@ -75,7 +75,6 @@ class _CountryListViewState extends State<CountryListView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies");
     this._countryList = _countryList.map((e) => e.localize(context)).toList();
   }
 
