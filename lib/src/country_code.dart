@@ -40,8 +40,8 @@ class CountryCode {
   }
 
   CountryCode localize(BuildContext context) {
-    print("localize " +
-        (CountryLocalizations.of(context)?.locale.languageCode ?? "noe"));
+    print(
+        "localize " + (Localizations.localeOf(context)?.languageCode ?? "noe"));
     return this
       ..name =
           CountryLocalizations.of(context)?.translate(this.code) ?? this.name;
