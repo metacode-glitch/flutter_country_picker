@@ -43,7 +43,9 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       final countryList =
           jsonList.map((json) => CountryCode.fromJson(json)).toList();
       final find = countryList.firstWhere(
-        (element) => element.code == widget.initialSelection,
+        (element) =>
+            element.code == widget.initialSelection ||
+            element.dialCode == widget.initialSelection,
         orElse: () => CountryCode(),
       );
       if (find.name != null) {
