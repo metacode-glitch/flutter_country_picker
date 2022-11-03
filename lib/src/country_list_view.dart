@@ -73,12 +73,6 @@ class _CountryListViewState extends State<CountryListView> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    this._countryList = _countryList.map((e) => e.localize(context)).toList();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -266,7 +260,7 @@ class _CountryListViewState extends State<CountryListView> {
               const SizedBox(width: 35),
               Flexible(
                 fit: FlexFit.tight,
-                child: _buildCountyText(country.name ?? ""),
+                child: _buildCountyText(country.localize(context).name ?? ""),
               ),
               SizedBox(
                 width: 90,
@@ -323,7 +317,7 @@ class _CountryListViewState extends State<CountryListView> {
 
   void _filterSearchResults(String query) {
     List<CountryCode> searchResult = <CountryCode>[];
-
+    _countryList.map((e) => e.localize(context));
     if (query.isEmpty) {
       _searching = false;
       searchResult.addAll(_countryList);
