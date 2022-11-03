@@ -1,14 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-
 import 'package:collection/collection.dart' show IterableExtension;
+import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'country_list_theme_data.dart';
-import 'country_localizations.dart';
-import 'utils.dart';
 
-import 'country_codes.dart';
 import 'country_code.dart';
+import 'country_codes.dart';
+import 'country_list_theme_data.dart';
 
 class CountryListView extends StatefulWidget {
   /// Called when a country is select.

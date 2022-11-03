@@ -4,11 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'country_codes.dart';
 import 'country_localizations.dart';
 
-mixin ToAlias {}
-
-@deprecated
-class CElement = CountryCode with ToAlias;
-
 /// Country element. This is the element that contains all the information
 class CountryCode {
   /// the name of the country

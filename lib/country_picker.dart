@@ -3,6 +3,7 @@ library country_picker;
 import 'package:flutter/material.dart';
 
 import 'src/country_code.dart';
+import 'src/country_codes.dart';
 import 'src/country_list_bottom_sheet.dart';
 import 'src/country_list_theme_data.dart';
 
@@ -14,11 +15,13 @@ class CountryCodePicker extends StatefulWidget {
   final ValueChanged<CountryCode>? onSelect;
   final List<String>? favorite;
   final CountryListThemeData? countryListTheme;
+  final String? initialSelection;
   const CountryCodePicker({
     Key? key,
     this.onSelect,
     this.favorite,
     this.countryListTheme,
+    this.initialSelection,
   }) : super(key: key);
 
   @override
@@ -33,6 +36,21 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   @override
   void initState() {
     super.initState();
+
+    if (widget.initialSelection != null) {
+      const List<Map<String, String>> jsonList = codes;
+
+      final countryList =
+          jsonList.map((json) => CountryCode.fromJson(json)).toList();
+      final find = countryList.firstWhere(
+        (element) => element.code == widget.initialSelection,
+        orElse: () => CountryCode(),
+      );
+      if (find.name != null) {
+        _selectedCountry = "${find.dialCode} ${find.name}";
+        return;
+      }
+    }
     _selectedCountry = widget.countryListTheme?.defaultText ?? "";
   }
 
