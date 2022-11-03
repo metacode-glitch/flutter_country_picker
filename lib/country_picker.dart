@@ -32,7 +32,7 @@ class CountryCodePicker extends StatefulWidget {
 
 class CountryCodePickerState extends State<CountryCodePicker> {
   String _selectedCountry = "";
-
+  CountryCode? _selected;
   @override
   void initState() {
     super.initState();
@@ -49,11 +49,20 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         orElse: () => CountryCode(),
       );
       if (find.name != null) {
-        _selectedCountry = "${find.dialCode} ${find.name}";
-        return;
+        _selected = find;
       }
     }
-    _selectedCountry = widget.countryListTheme?.defaultText ?? "";
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_selected != null) {
+      _selected!.localize(context);
+      _selectedCountry = "${_selected!.dialCode} ${_selected!.name}";
+    } else {
+      _selectedCountry = widget.countryListTheme?.defaultText ?? "";
+    }
   }
 
   @override
@@ -74,8 +83,10 @@ class CountryCodePickerState extends State<CountryCodePicker> {
               context: context,
               onSelect: (value) {
                 setState(() {
+                  _selected = value;
                   _selectedCountry = "${value.dialCode} ${value.name}";
                 });
+
                 widget.onSelect?.call(value);
               },
               countryListTheme: widget.countryListTheme,
