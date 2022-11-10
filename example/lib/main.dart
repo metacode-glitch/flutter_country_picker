@@ -65,46 +65,14 @@ class HomePage extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              width: 120,
-              height: 100,
-              child: CountryCodePicker(
-                onSelect: (CountryCode country) {
-                  print('Select country: ${country.name}');
-                },
-                favorite: <String>['KR', 'CN', 'US'],
-                countryListTheme: CountryListThemeData(
-                    hintText: "검색할 국가 이름 또는 번호를 입력하세요.",
-                    searchingText: "검색된 정보",
-                    favoriteText: "즐겨찾는 국가",
-                    emptyText: "조회된 정보가 없습니다.",
-                    labelText: "국가선택",
-                    defaultText: "국가선택",
-                    textStyle: TextStyle(),
-                    buttonCountyNameTextStyle: TextStyle(
-                      color: const Color(0xff4d4d4d),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    buttonDialCodeTextStyle: TextStyle(
-                      color: const Color(0xff4d4d4d),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    labelTextStyle: TextStyle(
-                      color: const Color(0xffaeaeae),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                    headerTextStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ),
-                    downArrow: SvgPicture.asset(
-                      'assets/image/arrow_down.svg',
-                      color: Color(0xff4d5256),
-                      fit: BoxFit.scaleDown,
-                    )),
-              ),
-            ),
+                width: 120,
+                height: 100,
+                child: ElevatedButton(
+                  child: Text("show"),
+                  onPressed: () {
+                    showCountryPicker(context: context);
+                  },
+                )),
           ),
         ],
       ),
