@@ -41,7 +41,5 @@ class CountryListThemeData {
     this.searchingText,
     this.emptyText,
     this.defaultText,
-    this.labelText,
-    this.downArrow,
   });
 }
