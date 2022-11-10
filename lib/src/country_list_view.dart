@@ -82,25 +82,26 @@ class _CountryListViewState extends State<CountryListView> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SizedBox(height: 12),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: TextField(
             autofocus: _searchAutofocus,
             controller: _searchController,
-            cursorColor: const Color(0xff6a6a6a),
+            cursorColor: const Color(0xff4d5256),
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: const EdgeInsets.all(8),
+              contentPadding: const EdgeInsets.fromLTRB(8, 11, 8, 11),
               focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xff6a6a6a), width: 2),
+                borderSide: BorderSide(color: Color(0xff6c55fb), width: 2),
               ),
               enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffb6b9c1), width: 2),
+                borderSide: BorderSide(color: Color(0xffe6e6e6), width: 2),
               ),
               hintText: widget.countryListTheme?.hintText ?? "",
               hintStyle: const TextStyle(
-                  color: Color(0xffacacac),
+                  color: Color(0xffb9b9b9),
                   fontWeight: FontWeight.w400,
                   fontStyle: FontStyle.normal,
                   fontSize: 12.0),
@@ -111,7 +112,7 @@ class _CountryListViewState extends State<CountryListView> {
                         _searchController.clear();
                         _filterSearchResults("");
                       },
-                      color: const Color(0xffb6b9c1),
+                      color: const Color(0xff4d5256),
                     )
                   : null,
             ),
@@ -159,7 +160,7 @@ class _CountryListViewState extends State<CountryListView> {
         Center(
           child: Text(
             widget.countryListTheme?.emptyText ?? "",
-            style: textStyle.copyWith(color: const Color(0xffafafaf)),
+            style: textStyle.copyWith(color: const Color(0xffb9b9b9)),
           ),
         ),
       );
@@ -190,9 +191,14 @@ class _CountryListViewState extends State<CountryListView> {
 
     for (final entry in groupedLists.entries) {
       result.add(
-        const Divider(
-          thickness: 8,
-          color: Color(0xffebebeb),
+        Container(
+          height: 8,
+          decoration: BoxDecoration(
+              color: const Color(0xfff6f6f6),
+              border: Border.all(
+                color: const Color(0xffeaebf4),
+                width: 1,
+              )),
         ),
       );
 
@@ -239,7 +245,7 @@ class _CountryListViewState extends State<CountryListView> {
         Container(
           height: 1,
           decoration: const BoxDecoration(
-            color: Color(0xffe9e9e9),
+            color: Color(0xfff1f1f1),
           ),
         ),
         const SizedBox(

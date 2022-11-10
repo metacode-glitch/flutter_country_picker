@@ -77,6 +77,9 @@ class CountryCodePickerState extends State<CountryCodePicker> {
           widget.countryListTheme?.labelText ?? "",
           style: textStyle,
         ),
+        SizedBox(
+          height: 4,
+        ),
         OutlinedButton(
           onPressed: () {
             showCountryPicker(
@@ -93,10 +96,10 @@ class CountryCodePickerState extends State<CountryCodePicker> {
               favorite: widget.favorite,
             );
           },
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size.zero,
-            padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
-          ),
+          style: OutlinedButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: const EdgeInsets.fromLTRB(9, 13, 9, 13),
+              side: BorderSide(width: 1, color: const Color(0xffe6e6e6))),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                     textStyle: TextStyle(),
                     buttonCountyNameTextStyle: TextStyle(
                       color: const Color(0xff4d4d4d),
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                     buttonDialCodeTextStyle: TextStyle(
                       color: const Color(0xff4d4d4d),
@@ -100,7 +100,7 @@ class HomePage extends StatelessWidget {
                     ),
                     downArrow: SvgPicture.asset(
                       'assets/image/arrow_down.svg',
-                      color: Color(0xffb6b9c1),
+                      color: Color(0xff4d5256),
                       fit: BoxFit.scaleDown,
                     )),
               ),

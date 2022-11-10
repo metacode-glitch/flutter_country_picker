@@ -60,8 +60,8 @@ Widget _builder(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       SizedBox(
-          width: 45,
-          height: 45,
+          width: 44,
+          height: 44,
           child: FloatingActionButton(
             onPressed: () {
               Navigator.pop(context);
@@ -73,7 +73,7 @@ Widget _builder(
       Container(
         height: height,
         decoration: BoxDecoration(
-          color: Color(0xfff1f1f1),
+          color: Color(0xffeaebf4),
           borderRadius: _borderRadius,
           //border: Border.all(
           //  width: 1,
