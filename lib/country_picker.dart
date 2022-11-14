@@ -3,11 +3,11 @@ library country_picker;
 import 'package:flutter/material.dart';
 
 import 'src/country_code.dart';
-import 'src/country_codes.dart';
 import 'src/country_list_bottom_sheet.dart';
 import 'src/country_list_theme_data.dart';
 
 export 'src/country_code.dart';
+export 'src/country_codes.dart';
 export 'src/country_list_theme_data.dart';
 export 'src/country_localizations.dart';
 
