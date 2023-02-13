@@ -313,7 +313,7 @@ class _CountryListViewState extends State<CountryListView> {
           "p": Style.fromTextStyle(
               textStyle.copyWith(fontWeight: FontWeight.normal)),
           "b": Style.fromTextStyle(
-              textStyle.copyWith(fontWeight: FontWeight.bold)),
+              textStyle.copyWith(fontWeight: FontWeight.normal, fontSize: 15)),
         },
       );
     } else {
